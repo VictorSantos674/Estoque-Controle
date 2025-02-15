@@ -1,0 +1,35 @@
+# Ignora arquivos do Maven
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Ignora arquivos do IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Ignora arquivos do Eclipse
+.settings/
+.classpath
+.project
+
+# Ignora arquivos do VSCode
+.vscode/
+
+# Ignora logs e arquivos temporários
+*.log
+*.tmp
+*.swp
+
+# Ignora arquivos de configuração local
+application-local.properties
+
+# Ignora arquivos do banco de dados
+*.db
+*.sql
+
+# Ignora arquivos do sistema operacional
+.DS_Store
+Thumbs.db

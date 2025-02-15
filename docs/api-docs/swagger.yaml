@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Sistema de Controle de Estoque
+  description: API para gerenciamento de produtos em um sistema de controle de estoque.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+
+paths:
+  /produtos:
+    get:
+      summary: Listar todos os produtos
+      description: Retorna uma lista de todos os produtos cadastrados.
+      responses:
+        '200':
+          description: Lista de produtos retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+    post:
+      summary: Cadastrar um novo produto
+      description: Cadastra um novo produto no sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '201':
+          description: Produto cadastrado com sucesso.
+
+  /produtos/{id}:
+    get:
+      summary: Buscar produto por ID
+      description: Retorna os detalhes de um produto específico.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Produto encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '404':
+          description: Produto não encontrado.
+    put:
+      summary: Atualizar um produto
+      description: Atualiza os dados de um produto existente.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '200':
+          description: Produto atualizado com sucesso.
+        '404':
+          description: Produto não encontrado.
+    delete:
+      summary: Excluir um produto
+      description: Exclui um produto do sistema.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Produto excluído com sucesso.
+        '404':
+          description: Produto não encontrado.
+
+components:
+  schemas:
+    Produto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do produto.
+        nome:
+          type: string
+          description: Nome do produto.
+        quantidade:
+          type: integer
+          description: Quantidade em estoque.
+        preco:
+          type: number
+          format: double
+          description: Preço do produto.
+      example:
+        id: 1
+        nome: "Produto Exemplo"
+        quantidade: 10
+        preco: 99.99
